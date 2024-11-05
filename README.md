@@ -20,14 +20,14 @@ dependencies:
 ```
 
 
-# Then, import it in your Dart code:
+## Then, import it in your Dart code:
 ```
 import 'package:flutter_local_storage/flutter_local_storage.dart';
 
 ```
 
-## Usage
-# Initialization
+# Usage
+## Initialization
 Initialize the storage by calling initFlutterLocalStorage with a secret key:
 
 ```
@@ -87,25 +87,25 @@ void main() async {
 ``` 
 
 
-## How It Works
+# How It Works
 
-# Singleton Pattern: 
+## Singleton Pattern: 
 FlutterLocalStorage uses a singleton pattern to ensure a single instance is used across the app.
 
-# Encryption: 
+## Encryption: 
 Data is encrypted using AES encryption and stored in a JSON file.
 
-# Data Handling: 
+## Data Handling: 
 Each write, read, and delete operation directly updates the JSON file for persistence.
 
-## Dependencies
+# Dependencies
 
 - **path_provider**: For accessing device paths.
 - **encrypt**: For AES encryption and data security.
 - **crypto**: For generating a secure SHA-256 key.
 
-## License
-# MIT License
+# License
+## MIT License
 
 This README provides an overview, installation instructions, usage examples, and technical details to help users understand and utilize your package.
 
