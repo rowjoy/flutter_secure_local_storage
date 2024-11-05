@@ -1,15 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:flutter_local_storage/flutter_local_storage.dart';
+import 'package:flutter_secure_local_storage/flutter_secure_local_storage.dart';
 
-FlutterLocalStorage box = FlutterLocalStorage();
+
+FlutterSecureLocalStorage box = FlutterSecureLocalStorage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// your_secret_key is encript your local store data .
-  await box.initFlutterLocalStorage(secretKey: "your_secret_key");
+  await box.initFlutterSecureLocalStorage(secretKey: "your_secret_key");
   runApp(const MyApp());
 }
 
