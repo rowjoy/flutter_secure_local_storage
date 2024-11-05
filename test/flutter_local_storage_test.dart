@@ -1,13 +1,13 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_local_storage/flutter_secure_local_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_local_storage/flutter_local_storage.dart';
 import 'dart:io';
 
 const MethodChannel _channel =
     MethodChannel('plugins.flutter.io/path_provider');
 
 void main() {
-  late FlutterLocalStorage storage;
+  late FlutterSecureLocalStorage storage;
   late Directory tempDir;
   const secretKey = 'mySecretKey';
   const testKey = 'username';
@@ -27,8 +27,8 @@ void main() {
       return null;
     });
 
-    storage = FlutterLocalStorage();
-    await storage.initFlutterLocalStorage(secretKey: secretKey);
+    storage = FlutterSecureLocalStorage();
+    await storage.initFlutterSecureLocalStorage(secretKey: secretKey);
   });
 
   tearDownAll(() async {

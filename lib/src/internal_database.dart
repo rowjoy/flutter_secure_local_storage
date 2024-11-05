@@ -1,55 +1,55 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_local_storage/src/internal_database_io.dart';
+import 'package:flutter_secure_local_storage/flutter_secure_local_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:crypto/crypto.dart';
 
-class FlutterLocalStorage extends InternalDatabaseIo {
+class FlutterSecureLocalStorage extends InternalDatabaseIo {
   ///[_instance]
-  /// This static field stores the single instance of [FlutterLocalStorage].
-  /// Since it’s static, it belongs to the class itself, not any [_instance], meaning all references to [FlutterLocalStorage] can share this same [_instance].
-  static FlutterLocalStorage? _instance;
+  /// This static field stores the single instance of [FlutterSecureLocalStorage].
+  /// Since it’s static, it belongs to the class itself, not any [_instance], meaning all references to [FlutterSecureLocalStorage] can share this same [_instance].
+  static FlutterSecureLocalStorage? _instance;
 
-  /// [_file]        /// [FlutterLocalStorage]
+  /// [_file]        /// [FlutterSecureLocalStorage]
   ///  [_file] is another static field meant to represent a file where data will be stored.
   /// The [late] keyword means it will be [initialized] later, ideally once the storage location is determined, e.g., during an init method.
   static late File _file;
 
   ///[_data]
   /// [_data] is a map that will hold the key-value pairs stored in [memory].
-  /// By making it static, it ensures that data is stored and accessible across all usages of the [FlutterLocalStorage] instance.
+  /// By making it static, it ensures that data is stored and accessible across all usages of the [FlutterSecureLocalStorage] instance.
   static late Map<String, dynamic> _data;
 
   ///[_encrypter] Use encrypt data . User data security  / [encrypts] the data by converting it to a Base64 string after encoding it to JSON.
   static late encrypt.Encrypter _encrypter;
 
-  /// [_internal]  /// [FlutterLocalStorage]
-  /// This private constructor (_internal) prevents external classes from creating a new instance of FlutterLocalStorage using FlutterLocalStorage().
+  /// [_internal]  /// [FlutterSecureLocalStorage]
+  /// This private constructor (_internal) prevents external classes from creating a new instance of FlutterSecureLocalStorage using FlutterSecureLocalStorage().
   /// It’s used internally within the class to control the instance creation and supports the singleton pattern.
 
-  FlutterLocalStorage._internal();
+  FlutterSecureLocalStorage._internal();
 
-  /// [factory] ///[FlutterLocalStorage]
+  /// [factory] ///[FlutterSecureLocalStorage]
   /// The factory keyword is used to define a constructor that returns an instance of the class, but it can control what instance is returned.
-  /// In this case, it checks if [_instance] is null, meaning no instance of [FlutterLocalStorage] has been created yet.
-  /// If [_instance] is null, it creates a new instance by calling [FlutterLocalStorage._internal()].
+  /// In this case, it checks if [_instance] is null, meaning no instance of [FlutterSecureLocalStorage] has been created yet.
+  /// If [_instance] is null, it creates a new instance by calling [FlutterSecureLocalStorage._internal()].
   /// If [_instance] is not null, it returns the already created instance.
-  /// This ensures that only one instance of [FlutterLocalStorage] will ever be created.
+  /// This ensures that only one instance of [FlutterSecureLocalStorage] will ever be created.
 
-  factory FlutterLocalStorage() {
-    return _instance ??= FlutterLocalStorage._internal();
+  factory FlutterSecureLocalStorage() {
+    return _instance ??= FlutterSecureLocalStorage._internal();
   }
 
   /// [Singleton]
   /// By combining a private constructor with a factory constructor, this code implements a singleton pattern.
-  /// This pattern ensures that only one instance of FlutterLocalStorage is created and shared across the application, allowing you to centralize and manage shared data effectively.
+  /// This pattern ensures that only one instance of FlutterSecureLocalStorage is created and shared across the application, allowing you to centralize and manage shared data effectively.
 
-  /// [initFlutterLocalStorage] This function returns a Future<void> meaning it is an asynchronous function with no return value (void).
+  /// [initFlutterSecureLocalStorage] This function returns a Future<void> meaning it is an asynchronous function with no return value (void).
   /// The [async] keyword enables the use of await for asynchronous operations within this function.
 
   @override
-  Future<void> initFlutterLocalStorage({required String secretKey}) async {
+  Future<void> initFlutterSecureLocalStorage({required String secretKey}) async {
     /// [ getApplicationDocumentsDirectory() ]  is a function from the path_provider package that returns the directory path where the app can store documents and other files.
     /// The resulting path is assigned to the variable [directory]
 
@@ -212,4 +212,5 @@ class FlutterLocalStorage extends InternalDatabaseIo {
     // Return false for other data types, as they're considered non-empty
     return false;
   }
+  
 }

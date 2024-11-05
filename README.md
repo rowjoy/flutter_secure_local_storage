@@ -16,13 +16,13 @@ Add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_local_storage: ^0.0.1
+  flutter_secure_local_storage: ^0.0.1
 ```
 
 
 ## Then, import it in your Dart code:
 ```
-import 'package:flutter_local_storage/flutter_local_storage.dart';
+import 'package:flutter_secure_local_storage/flutter_secure_local_storage.dart';
 
 ```
 
@@ -69,7 +69,7 @@ Here’s a full example showcasing basic usage:
 
 ``` 
 import 'package:flutter/material.dart';
-import 'package:flutter_local_storage/flutter_local_storage.dart';
+import 'package:flutter_secure_local_storage/flutter_secure_local_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
