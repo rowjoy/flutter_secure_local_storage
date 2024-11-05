@@ -1,7 +1,9 @@
 name: flutter_local_storage
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/rowjoy
+repository: https://github.com/rowjoy/flutter_local_storage.git
+
 
 environment:
   sdk: ^3.5.1
@@ -21,6 +23,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  mockito: ^5.0.0
+  path_provider_platform_interface: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

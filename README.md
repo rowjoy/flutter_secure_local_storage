@@ -1,40 +1,111 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+#  Flutter Local Storage
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A Flutter package for secure local storage of key-value pairs, designed with encryption and singleton patterns. This package leverages the `path_provider` and `encrypt` libraries to store encrypted data in a JSON file located in the app's document directory.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Singleton Design**: Ensures a single instance of the storage class throughout the app.
+- **Data Encryption**: Uses AES encryption for secure data storage.
+- **Key-Value Storage**: Store, retrieve, update, and delete key-value pairs easily.
+- **Persistent Storage**: Data is saved to a JSON file that persists across app sessions.
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the following to your `pubspec.yaml` file:
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  flutter_local_storage: ^0.0.1
 ```
 
-## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
-# flutter_local_storage
+# Then, import it in your Dart code:
+```
+import 'package:flutter_local_storage/flutter_local_storage.dart';
+
+```
+
+## Usage
+# Initialization
+Initialize the storage by calling initFlutterLocalStorage with a secret key:
+
+```
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final storage = FlutterLocalStorage();
+  await storage.initFlutterLocalStorage(secretKey: 'mySecretKey');
+}
+```
+
+## Writing Data
+To store data with a key, use the write method:
+```
+await storage.write('username', 'JohnDoe');
+```
+
+## Reading Data
+Retrieve stored data using the read method:
+```
+final username = storage.read('username', defaultValue: 'Guest');
+print(username); // Output: JohnDoe
+```
+
+## Removing Data
+To remove specific data by key:
+```
+await storage.remove('username');
+```
+
+## Clearing All Data
+To clear all data stored in the file:
+```
+await storage.clearAllData();
+```
+
+## Example
+
+Here’s a full example showcasing basic usage:
+
+``` 
+import 'package:flutter/material.dart';
+import 'package:flutter_local_storage/flutter_local_storage.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final storage = FlutterLocalStorage();
+  await storage.initFlutterLocalStorage(secretKey: 'mySecretKey');
+
+  await storage.write('username', 'JohnDoe');
+
+  final username = storage.read('username', defaultValue: 'Guest');
+  print(username);
+
+  await storage.remove('username');
+  await storage.clearAllData();
+}
+``` 
+
+
+## How It Works
+
+# Singleton Pattern: 
+FlutterLocalStorage uses a singleton pattern to ensure a single instance is used across the app.
+
+# Encryption: 
+Data is encrypted using AES encryption and stored in a JSON file.
+
+# Data Handling: 
+Each write, read, and delete operation directly updates the JSON file for persistence.
+
+## Dependencies
+
+- **path_provider**: For accessing device paths.
+- **encrypt**: For AES encryption and data security.
+- **crypto**: For generating a secure SHA-256 key.
+
+## License
+# MIT License
+
+This README provides an overview, installation instructions, usage examples, and technical details to help users understand and utilize your package.
+
