@@ -9,7 +9,7 @@
 # packages, and plugins designed to encourage good coding practices.
 analyzer:
   errors:
-    avoid_print: ignore ignore ignore
+    avoid_print: ignore # This correctly ignores the avoid_print rule
 include: package:flutter_lints/flutter.yaml
 
 linter:
