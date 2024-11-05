@@ -49,7 +49,8 @@ class FlutterSecureLocalStorage extends InternalDatabaseIo {
   /// The [async] keyword enables the use of await for asynchronous operations within this function.
 
   @override
-  Future<void> initFlutterSecureLocalStorage({required String secretKey}) async {
+  Future<void> initFlutterSecureLocalStorage(
+      {required String secretKey}) async {
     /// [ getApplicationDocumentsDirectory() ]  is a function from the path_provider package that returns the directory path where the app can store documents and other files.
     /// The resulting path is assigned to the variable [directory]
 
@@ -212,5 +213,4 @@ class FlutterSecureLocalStorage extends InternalDatabaseIo {
     // Return false for other data types, as they're considered non-empty
     return false;
   }
-  
 }

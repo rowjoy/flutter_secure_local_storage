@@ -1,6 +1,6 @@
 name: flutter_secure_local_storage
 description: "A secure, encrypted local storage solution for Flutter applications, enabling persistent key-value storage with AES encryption."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/rowjoy
 repository: https://github.com/rowjoy/flutter_secure_local_storage.git
 

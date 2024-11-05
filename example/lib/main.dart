@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_local_storage/flutter_secure_local_storage.dart';
 
-
 FlutterSecureLocalStorage box = FlutterSecureLocalStorage();
 
 void main() async {
