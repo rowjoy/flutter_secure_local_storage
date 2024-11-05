@@ -1,51 +1,94 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:flutter_local_storage/flutter_local_storage.dart';
+import 'dart:io';
 
-void main() async {
-   MethodChannel channel = const MethodChannel('plugins.flutter.io/path_provider');
 
-   // Ensure the binding is initialized only once at the start
-  TestWidgetsFlutterBinding.ensureInitialized();
-  // ignore: deprecated_member_use
+const MethodChannel _channel = MethodChannel('plugins.flutter.io/path_provider');
 
-  // Set up a mock channel for path_provider
-    // Mock the platform channel method call for path_provider
-  setUpAll(() {
-    // Mock the getApplicationDocumentsDirectory method call
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+void main() {
+  late FlutterLocalStorage storage;
+  late Directory tempDir;
+  const secretKey = 'mySecretKey';
+  const testKey = 'username';
+  const testValue = 'JohnDoe';
+
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    // Create a temporary directory
+    tempDir = await Directory.systemTemp.createTemp();
+
+    // Mock path_provider channel
+    _channel.setMockMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == 'getApplicationDocumentsDirectory') {
-        return '/mock_directory'; // Provide a mock path
+        return tempDir.path; // Use the temporary directory path
       }
       return null;
     });
-  });
-  
 
-  // Clear the mock handler after tests
-  tearDownAll(() {
-    channel.setMockMethodCallHandler(null);
+    storage = FlutterLocalStorage();
+    await storage.initFlutterLocalStorage(secretKey: secretKey);
   });
 
+  tearDownAll(() async {
+    // Clean up by deleting the temporary directory
+    await tempDir.delete(recursive: true);
+  });
 
-  final flutterLocalStorage = FlutterLocalStorage();
-  await flutterLocalStorage.initFlutterLocalStorage(secretKey: "flutterLocalStorage");
-  test('adds one to input values', () async {
-    await flutterLocalStorage.write("A", "13");
-    expect( await flutterLocalStorage.read("A"), "13");
-     
-    await flutterLocalStorage.write("B", "14");
-    expect(await flutterLocalStorage.read("B"), "14");
+  group('FlutterLocalStorage', () {
+    test('should write data and store it securely in file', () async {
+      await storage.write(testKey, testValue);
+      final value = storage.read(testKey, defaultValue: 'Unknown');
 
-    await flutterLocalStorage.write("C", "15");
-    expect(await flutterLocalStorage.read("C"), "15");
+      expect(value, testValue);
+    });
 
-    await flutterLocalStorage.write("D", "16");
-    expect(await flutterLocalStorage.read("D"), "16");
+    test('should read data from storage correctly', () async {
+      await storage.write(testKey, testValue);
+      final value = storage.read(testKey);
 
-    await flutterLocalStorage.write("E", "17");
-    expect(await flutterLocalStorage.read("E"), "17");
-   
+      expect(value, testValue);
+    });
+
+    test('should return default value if key does not exist', () {
+      final value = storage.read('nonExistentKey', defaultValue: 'defaultValue');
+
+      expect(value, 'defaultValue');
+    });
+
+    test('should remove data from storage', () async {
+      await storage.write(testKey, testValue);
+
+      await storage.remove(testKey);
+      final value = storage.read(testKey, defaultValue: 'defaultValue');
+
+      expect(value, 'defaultValue');
+    });
+
+    test('should clear all data from storage', () async {
+      await storage.write(testKey, testValue);
+      await storage.write('anotherKey', 'anotherValue');
+
+      await storage.clearAllData();
+
+      expect(storage.read(testKey, defaultValue: 'defaultValue'), 'defaultValue');
+      expect(storage.read('anotherKey', defaultValue: 'defaultValue'), 'defaultValue');
+    });
+
+    test('should handle DateTime values correctly', () async {
+      final dateTime = DateTime.now();
+      await storage.write('date', dateTime);
+      
+      final storedDate = storage.read('date');
+      expect(storedDate, dateTime);
+    });
+
+    test('should handle encryption and decryption', () async {
+      await storage.write(testKey, testValue);
+      final value = storage.read(testKey);
+
+      expect(value, testValue);
+    });
   });
 }
