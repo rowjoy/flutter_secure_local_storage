@@ -5,14 +5,13 @@ import 'package:flutter_local_storage/flutter_local_storage.dart';
 
 FlutterLocalStorage box = FlutterLocalStorage();
 
-void main() async{
- WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   /// your_secret_key is encript your local store data .
   await box.initFlutterLocalStorage(secretKey: "your_secret_key");
   runApp(const MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -26,7 +25,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -41,64 +39,46 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<MyHomePage> {
- 
- Map<String , dynamic> mapValue = {
-
-  "user": {
-    "id": 1,
-    "name": "Alice",
-    "email": "alice@example.com",
-    "address": {
-      "street": "123 Main St",
-      "city": "Wonderland",
-      "zipcode": "12345"
-    },
-    "orders": [
-      {
-        "id": 101,
-        "product": "Book",
-        "quantity": 2,
-        "price": 15.5
+  Map<String, dynamic> mapValue = {
+    "user": {
+      "id": 1,
+      "name": "Alice",
+      "email": "alice@example.com",
+      "address": {
+        "street": "123 Main St",
+        "city": "Wonderland",
+        "zipcode": "12345"
       },
-      {
-        "id": 102,
-        "product": "Pen",
-        "quantity": 5,
-        "price": 2.5
-      }
-    ]
-  }
-};
-
-
-
+      "orders": [
+        {"id": 101, "product": "Book", "quantity": 2, "price": 15.5},
+        {"id": 102, "product": "Pen", "quantity": 5, "price": 2.5}
+      ]
+    }
+  };
 
   int _counter = 0;
   String keyNumber = "keyNumber";
 
   void _incrementCounter() {
     setState(() {
-
       _counter++;
       box.write(keyNumber, "Jamirul islam");
 
-  // Write encrypted data
-   box.write('username', 'Alice');
-   box.write('age', 30);
-   box.write('age1', 30.001);
-   box.write('createdAt', DateTime.now());
-   box.write("MapValue", mapValue);
+      // Write encrypted data
+      box.write('username', 'Alice');
+      box.write('age', 30);
+      box.write('age1', 30.001);
+      box.write('createdAt', DateTime.now());
+      box.write("MapValue", mapValue);
 
-    // Read and decrypt data
-  print(box.read('username')); // Should print 'Alice'
-  print(box.read('age')); 
-  // Should print 30
-  print(box.read('age1'));
-  print(box.read('createdAt'));
-  print(box.read("MapValue")["user"]["email"]);
+      // Read and decrypt data
+      print(box.read('username')); // Should print 'Alice'
+      print(box.read('age'));
+      // Should print 30
+      print(box.read('age1'));
+      print(box.read('createdAt'));
+      print(box.read("MapValue")["user"]["email"]);
     });
   }
 
@@ -137,13 +117,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=> const NextScreen()));
-              }, 
+              },
               child: Text("Cleck me"),
             ),
             const Text(
@@ -158,11 +138,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-
