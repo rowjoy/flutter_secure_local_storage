@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_local_storage/flutter_local_storage.dart';
 import 'dart:io';
 
-
-const MethodChannel _channel = MethodChannel('plugins.flutter.io/path_provider');
+const MethodChannel _channel =
+    MethodChannel('plugins.flutter.io/path_provider');
 
 void main() {
   late FlutterLocalStorage storage;
@@ -52,7 +52,8 @@ void main() {
     });
 
     test('should return default value if key does not exist', () {
-      final value = storage.read('nonExistentKey', defaultValue: 'defaultValue');
+      final value =
+          storage.read('nonExistentKey', defaultValue: 'defaultValue');
 
       expect(value, 'defaultValue');
     });
@@ -72,14 +73,16 @@ void main() {
 
       await storage.clearAllData();
 
-      expect(storage.read(testKey, defaultValue: 'defaultValue'), 'defaultValue');
-      expect(storage.read('anotherKey', defaultValue: 'defaultValue'), 'defaultValue');
+      expect(
+          storage.read(testKey, defaultValue: 'defaultValue'), 'defaultValue');
+      expect(storage.read('anotherKey', defaultValue: 'defaultValue'),
+          'defaultValue');
     });
 
     test('should handle DateTime values correctly', () async {
       final dateTime = DateTime.now();
       await storage.write('date', dateTime);
-      
+
       final storedDate = storage.read('date');
       expect(storedDate, dateTime);
     });
