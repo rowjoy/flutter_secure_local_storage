@@ -1,7 +1,4 @@
-library flutter_local_storage;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+library flutter_local_storage;
+export 'src/internal_database.dart';
+export 'src/internal_database_io.dart';
