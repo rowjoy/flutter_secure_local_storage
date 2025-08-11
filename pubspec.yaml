@@ -15,15 +15,15 @@ dependencies:
   # path_provide pakage get and json file path  in device location 
   path_provider: ^2.1.5
   # encrypt pakage use encrypt data  
-  encrypt: ^5.0.0
+  encrypt: ^5.0.3
   # crypto data . 
-  crypto: ^3.0.0
+  crypto: ^3.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
-  mockito: ^5.3.0 # Use the latest version
+  flutter_lints: ^5.0.0
+  mockito: ^5.5.0 # Use the latest version
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

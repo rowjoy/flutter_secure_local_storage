@@ -45,7 +45,7 @@ class FlutterSecureLocalStorage extends InternalDatabaseIo {
   /// By combining a private constructor with a factory constructor, this code implements a singleton pattern.
   /// This pattern ensures that only one instance of FlutterSecureLocalStorage is created and shared across the application, allowing you to centralize and manage shared data effectively.
 
-  /// [initFlutterSecureLocalStorage] This function returns a Future<void> meaning it is an asynchronous function with no return value (void).
+  /// [initFlutterSecureLocalStorage] This function returns a Future meaning it is an asynchronous function with no return value (void).
   /// The [async] keyword enables the use of await for asynchronous operations within this function.
 
   @override
